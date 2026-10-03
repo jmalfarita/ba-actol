@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Absolvement - Register</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <!-- CHANGED: jQuery and jQuery Validation plugin -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.21.0/dist/jquery.validate.min.js"></script>
+</head>
+
+<body>
+
+    <main class="container">
+
+        <div class="symbol">✦</div>
+
+        <h1>Absolvement</h1>
+
+        <p class="subtitle">
+            Forge your destiny in search of redemption.
+        </p>
+
+        <form id="registerForm" action="#" method="post" novalidate>
+
+            <label for="username">Username</label>
+            <input
+                type="text"
+                id="username"
+                name="username"
+                placeholder="Choose a username"
+                required
+            >
+
+            <label for="email">Email Address</label>
+            <input
+                type="email"
+                id="email"
+                name="email"
+                placeholder="Enter your email"
+                required
+            >
+
+            <label for="password">Password</label>
+            <input
+                type="password"
+                id="password"
+                name="password"
+                placeholder="Create a password"
+                required
+            >
+
+            <label for="confirm-password">Confirm Password</label>
+            <input
+                type="password"
+                id="confirm-password"
+                name="confirm-password"
+                placeholder="Confirm your password"
+                required
+            >
+
+            <button type="submit">Begin Your Afterlife Journey</button>
+
+        </form>
+
+            <script>
+                $(document).ready(function () {
+                    $("#registerForm").validate({
+                        rules: {
+                            username: {
+                                required: true,
+                                minlength: 3
+                            },
+                            email: {
+                                required: true,
+                                email: true
+                            },
+                            password: {
+                                required: true,
+                                minlength: 5
+                            },
+                            "confirm-password": {
+                                required: true,
+                                equalTo: "#password"
+                            }
+                        },
+
+                        messages: {
+                            username: {
+                                required: "Please choose a username.",
+                                minlength: "Username must be at least 3 characters."
+                            },
+                            email: {
+                                required: "Please enter your email address.",
+                                email: "Please enter a valid email address."
+                            },
+                            password: {
+                                required: "Please create a password.",
+                                minlength: "Password must be at least 5 characters."
+                            },
+                            "confirm-password": {
+                                required: "Please confirm your password.",
+                                equalTo: "Passwords do not match."
+                            }
+                        },
+
+                        errorElement: "span",
+
+                        submitHandler: function (form) {
+
+                            // show a message on the psge
+                            const message = document.createElement("p");
+                            message.textContent = "Registration Successful!";
+                            message.style.color = "#4CAF50";
+                            message.style.textAlign = "center";
+                            message.style.marginTop = "15px";
+
+                            form.insertAdjacentElement("afterend", message);
+
+                            // pa login page after 1.5 seconds
+                            setTimeout(function () {
+                                window.location.href = "login.html";
+                            }, 1500);
+                        }
+                    });
+                });
+            </script>
+
+        <p class="bottom">
+            Already have an account?
+            <a href="login.html">Return to your shell.</a>
+        </p>
+
+    </main>
+
+</body>
+</html>
