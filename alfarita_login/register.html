@@ -62,7 +62,7 @@
                 required
             >
 
-            <button type="submit">Begin Your Afterlife Journey</button>
+            <button type="submit">Begin Your Journey</button>
 
         </form>
 
@@ -110,17 +110,27 @@
                         errorElement: "span",
 
                         submitHandler: function (form) {
+                            const username = $("#username").val().trim();
+                            const email = $("#email").val().trim();
+                            const password = $("#password").val();
 
-                            // show a message on the psge
+                            // Store the registered demo account in this browser.
+                            localStorage.setItem(
+                                "alfaritaAccount",
+                                JSON.stringify({
+                                    username: username,
+                                    email: email,
+                                    password: password
+                                })
+                            );
+
                             const message = document.createElement("p");
                             message.textContent = "Registration Successful!";
                             message.style.color = "#4CAF50";
                             message.style.textAlign = "center";
                             message.style.marginTop = "15px";
-
                             form.insertAdjacentElement("afterend", message);
 
-                            // pa login page after 1.5 seconds
                             setTimeout(function () {
                                 window.location.href = "login.html";
                             }, 1500);
@@ -131,7 +141,7 @@
 
         <p class="bottom">
             Already have an account?
-            <a href="login.html">Return to your shell.</a>
+            <a href="login.html">Return to the realm</a>
         </p>
 
     </main>

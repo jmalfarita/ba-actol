@@ -7,6 +7,7 @@
 
     <link rel="stylesheet" href="style.css">
 
+    <!-- CHANGED: jQuery and jQuery Validation plugin -->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.21.0/dist/jquery.validate.min.js"></script>
 </head>
@@ -60,47 +61,41 @@
 
         <script>
             $(document).ready(function () {
+                // First-time visitors must register before they can log in.
+                if (!localStorage.getItem("alfaritaAccount")) {
+                    window.location.replace("register.html");
+                    return;
+                }
+
                 $("#loginForm").validate({
                     rules: {
-                        username: {
-                            required: true
-                        },
-                        password: {
-                            required: true
-                        }
+                        username: { required: true },
+                        password: { required: true }
                     },
-
                     messages: {
-                        username: {
-                            required: "Please do enter your username, admin."
-                        },
-                        password: {
-                            required: "Please enter your password (clue: 12345)."
-                        }
+                        username: { required: "Please enter your username." },
+                        password: { required: "Please enter your password." }
                     },
-
                     errorElement: "span",
 
                     submitHandler: function (form) {
                         const username = $("#username").val().trim();
                         const password = $("#password").val();
-
-                        
                         $("#loginError").remove();
 
-                        // static credentials heree
-                        if (username === "admin" && password === "12345") {
+                        const savedAccount = JSON.parse(
+                            localStorage.getItem("alfaritaAccount")
+                        );
 
-                            // logn success
+                        if (
+                            savedAccount &&
+                            username === savedAccount.username &&
+                            password === savedAccount.password
+                        ) {
                             sessionStorage.setItem("alfaritaLoggedIn", "true");
                             sessionStorage.setItem("alfaritaUsername", username);
-
-                            // sa landin
                             window.location.href = "../alfarita_landingan/index.html";
-
                         } else {
-
-                            // eror missij
                             $("#loginForm").after(
                                 '<p id="loginError">Invalid username or password.</p>'
                             );
@@ -111,7 +106,7 @@
         </script>
 
         <p class="bottom">
-            Not a fragment yet?
+            Not a warrior yet?
             <a href="register.html">Create an account</a>
         </p>
 
