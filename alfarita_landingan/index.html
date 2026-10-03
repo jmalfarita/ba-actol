@@ -278,8 +278,8 @@
                 if (username) {
                     const welcome = document.createElement("p");
                     welcome.textContent = "Welcome, " + username + "!";
-                    welcome.className = "text-light text-center mt-3";
-                    document.querySelector(".hero-text").appendChild(welcome);
+                    welcome.className = "text-light text-center mb-4";
+                    document.querySelector(".hero-text").prepend(welcome);
                 }
 
                 document.getElementById("logoutBtn").addEventListener("click", function (event) {
