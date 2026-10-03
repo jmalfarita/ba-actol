@@ -251,6 +251,11 @@
             const heroButtons = document.querySelectorAll(".hero-text a.btn-danger");
             const aboutButton = document.querySelector("#about a.btn-danger");
             const loggedIn = sessionStorage.getItem("alfaritaLoggedIn") === "true";
+                
+                if (!loggedIn) {
+                    window.location.href = "../alfarita_login/login.html";
+                     return;
+            }
             const username = sessionStorage.getItem("alfaritaUsername");
 
             if (loggedIn) {
